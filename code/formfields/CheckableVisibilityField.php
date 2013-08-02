@@ -104,4 +104,49 @@ class CheckableVisibilityField extends FormField {
 		return $this->child->Title();
 	}
 
+
+	/**
+	 * Returns a readonly version of this field
+	 */
+	public function performReadonlyTransformation() {
+		$copy = $this->child->castedCopy('ReadonlyField');
+		if ($this->child->hasMethod('getSource')) {
+			//e.g. DropdownField: set the title of the current selection
+			$source = $this->child->getSource();
+			$selection = $source[$this->child->Value()];
+			$copy->setValue($selection);
+		}
+		$copy->setReadonly(true);
+		return $copy;
+	}
+
+	/**
+	 * Add a CSS-class to the formfield-container.
+	 *
+	 * @param $class String
+	 */
+	public function addExtraClass($class) {
+		$this->extraClasses[$class] = $class;
+		$this->child->addExtraClass($class);
+		return $this;
+	}
+
+	/**
+	 * Remove a CSS-class from the formfield-container.
+	 *
+	 * @param $class String
+	 */
+	public function removeExtraClass($class) {
+		$pos = array_search($class, $this->extraClasses);
+		if($pos !== false) unset($this->extraClasses[$pos]);
+
+		$this->child->removeExtraClass($class);
+
+		return $this;
+	}
+
+	public function setAttribute($name, $value) {
+		return $this->child->setAttribute($name,$value);
+	}
+
 }
