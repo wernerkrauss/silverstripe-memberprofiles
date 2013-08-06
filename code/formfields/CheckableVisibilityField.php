@@ -17,6 +17,10 @@ class CheckableVisibilityField extends FormField {
 
 		$this->child    = $child;
 		$this->checkbox = new CheckboxField("Visible[{$this->name}]", '');
+
+		if (is_a($child, 'DateField')) {
+			$this->addExtraClass('date');
+		}
 	}
 
 	/**
@@ -97,8 +101,19 @@ class CheckableVisibilityField extends FormField {
 	}
 
 	public function Field($properties = array()) {
+		//hack for DateField
+		if (is_a($this->child, 'DateField')) {
+			$d = DateField_View_JQuery::create($this->child);
+			$d->onBeforeRender();
+			$html = $this->child->Field() . ' ' . $this->checkbox->Field();
+//			$html = $this->child->smallFieldHolder() . ' ' . $this->checkbox->Field();
+			$html = $d->onAfterRender($html);
+			return $html;
+		} else {
 		return $this->child->Field() . ' ' . $this->checkbox->Field();
+		}
 	}
+
 
 	public function Title() {
 		return $this->child->Title();
