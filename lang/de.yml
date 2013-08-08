@@ -60,7 +60,7 @@ de:
     MEMBERAPPROVEDCONTENT: 'Das Mitglied "%s" wurde bestätigt und kann sich nun anmelden.'
     MEMBERCHOICE: 'Erlaube dem Mitglied zu wählen'
     MEMBERFIELD: 'Mitglieds-Feld'
-    MEMBERWITHSAME: 'Es ist bereits ein Mitglied mit dem selben %s vorhanden.'
+    MEMBERWITHSAME: 'Es ist bereits ein Mitglied mit dieser %s registriert.'
     NAME: 'Name'
     NEEDSVALIDATIONTOLOGIN: 'Sie müssen Ihre Anmeldung zuerst bestätigen, bevor Sie sich einloggen können.'
     NOLOGINTILLCONFIRMED: 'Das Konto wird erst aktiv nachdem es bestätigt wurde.'
